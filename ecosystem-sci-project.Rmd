@@ -1,0 +1,90 @@
+---
+title: "soil-type-methane-flux"
+author: "Judy-Malas"
+date: "3/7/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load packages}
+
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+
+```
+
+```{r import-data}
+
+
+soil_profile_data <- read_excel("Data/ISCN_SOC-DATA_PROFILE_1-1 2.xlsx")
+
+
+
+
+```
+
+```{r soil profile structure}
+
+str(soil_profile_data)
+
+
+```
+
+```{r exploratory plot1}
+
+ggplot(soil_profile_data, aes(soil_taxon)) +
+  geom_bar()
+
+```
+
+```{r}
+c2 <- read_csv("data/ISCN-c2.csv") %>% 
+    janitor::clean_names()
+
+```
+
+```{r str}
+
+str(c2)
+
+```
+```{r}
+
+c2 %>% 
+  select(clay_tot_psa_percent) %>% 
+  filter()
+
+```
+
+```{r}
+
+clay <- drop_na(c2, clay_tot_psa_percent)
+
+ggplot(clay, aes(clay_tot_psa_percent))+
+  geom_histogram() +
+  theme_bw()
+
+```
+
+```{r}
+
+ggplot(clay, aes(state_state_province)) +
+  geom_bar()
+
+```
+```{r}
+clay %>% 
+  count(state_state_province) %>% 
+  arrange(desc(n))
+```
+
+```{r}
+
+range(clay$lat_dec_deg)
+
+```
+
